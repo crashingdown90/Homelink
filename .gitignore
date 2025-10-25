@@ -60,3 +60,4 @@ logs
 
 # Test files
 *.test.js.snap
+node_modules

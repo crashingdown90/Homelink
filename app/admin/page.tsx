@@ -15,6 +15,9 @@ import { getDashboardStats } from "@/lib/sanity/fetchers";
 import { formatPrice, formatRelativeTime } from "@/lib/utils";
 import Link from "next/link";
 
+// Force dynamic rendering for admin pages
+export const dynamic = 'force-dynamic';
+
 // Stats card component
 function StatCard({
   title,
@@ -69,8 +72,23 @@ function StatCard({
 }
 
 export default async function AdminDashboard() {
-  // Fetch dashboard statistics
-  const stats = await getDashboardStats();
+  // Fetch dashboard statistics with fallback
+  let stats;
+  try {
+    stats = await getDashboardStats();
+  } catch (error) {
+    // Fallback to empty stats if Sanity is not configured
+    stats = {
+      totalProperties: 0,
+      activeProperties: 0,
+      newLeads: 0,
+      totalLeads: 0,
+      activeAgents: 0,
+      totalAgents: 0,
+      recentLeads: [],
+      recentProperties: [],
+    };
+  }
 
   return (
     <div className="space-y-8">
@@ -78,7 +96,7 @@ export default async function AdminDashboard() {
       <div>
         <h1 className="text-3xl font-urbanist font-bold">Dashboard</h1>
         <p className="text-muted-foreground mt-1">
-          Welcome back! Here's an overview of your platform.
+          Welcome back! Here&apos;s an overview of your platform.
         </p>
       </div>
 

@@ -290,8 +290,8 @@ export default function DevelopersPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-card rounded-2xl p-8 shadow-sm">
                 <p className="text-lg mb-6 italic">
-                  "Sejak bergabung dengan Homelink, penjualan properti saya meningkat 300%. 
-                  Platform yang sangat user-friendly dan support tim yang luar biasa."
+                  &quot;Sejak bergabung dengan Homelink, penjualan properti saya meningkat 300%. 
+                  Platform yang sangat user-friendly dan support tim yang luar biasa.&quot;
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center">
@@ -306,8 +306,8 @@ export default function DevelopersPage() {
 
               <div className="bg-card rounded-2xl p-8 shadow-sm">
                 <p className="text-lg mb-6 italic">
-                  "Dashboard analytics Homelink membantu saya memahami market trend dan 
-                  mengoptimalkan strategi penjualan. Highly recommended!"
+                  &quot;Dashboard analytics Homelink membantu saya memahami market trend dan 
+                  mengoptimalkan strategi penjualan. Highly recommended!&quot;
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center">

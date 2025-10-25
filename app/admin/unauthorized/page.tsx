@@ -20,7 +20,7 @@ export default function UnauthorizedPage() {
             Access Denied
           </h1>
           <p className="text-muted-foreground">
-            You don't have permission to access this area. This section is restricted to authorized administrators only.
+            You don&apos;t have permission to access this area. This section is restricted to authorized administrators only.
           </p>
         </div>
 

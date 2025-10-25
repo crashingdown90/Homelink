@@ -256,6 +256,21 @@ export async function getDashboardStats() {
     }
   );
 
+  // Return fallback if Sanity returns null or undefined
+  if (!stats || typeof stats !== 'object') {
+    return {
+      totalProperties: 0,
+      activeProperties: 0,
+      newLeads: 0,
+      totalLeads: 0,
+      activeAgents: 0,
+      totalAgents: 0,
+      totalArticles: 0,
+      recentLeads: [],
+      recentProperties: [],
+    };
+  }
+
   return stats;
 }
 

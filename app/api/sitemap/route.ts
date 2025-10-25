@@ -51,13 +51,17 @@ const staticPages = [
 export async function GET(request: NextRequest) {
   try {
     // Fetch all dynamic slugs from Sanity
-    const { properties, articles } = await sanityFetch<{
+    const result = await sanityFetch<{
       properties: string[];
       articles: string[];
     }>(GET_ALL_SLUGS_FOR_SITEMAP, {}, {
       cache: 'no-store',
       next: { revalidate: 3600 }, // Revalidate every hour
     });
+
+    // Ensure arrays exist and are not undefined
+    const properties = result?.properties || [];
+    const articles = result?.articles || [];
 
     // Build XML sitemap
     const xml = `<?xml version="1.0" encoding="UTF-8"?>

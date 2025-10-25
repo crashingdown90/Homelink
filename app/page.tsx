@@ -192,7 +192,7 @@ export default async function HomePage() {
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-6">
-                  "Platform yang sangat membantu! Saya menemukan rumah impian dalam waktu singkat. Prosesnya mudah dan transparan."
+                  &quot;Platform yang sangat membantu! Saya menemukan rumah impian dalam waktu singkat. Prosesnya mudah dan transparan.&quot;
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center">
@@ -212,7 +212,7 @@ export default async function HomePage() {
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-6">
-                  "Sebagai agen, Homelink memudahkan saya mengelola listing dan mendapatkan leads berkualitas. Highly recommended!"
+                  &quot;Sebagai agen, Homelink memudahkan saya mengelola listing dan mendapatkan leads berkualitas. Highly recommended!&quot;
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center">
@@ -232,7 +232,7 @@ export default async function HomePage() {
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-6">
-                  "Fitur pencarian yang canggih dan foto properti berkualitas tinggi. Sangat membantu dalam pengambilan keputusan."
+                  &quot;Fitur pencarian yang canggih dan foto properti berkualitas tinggi. Sangat membantu dalam pengambilan keputusan.&quot;
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center">
