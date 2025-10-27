@@ -76,12 +76,8 @@ export async function sanityFetch<T = any>(
     return result;
   } catch (error) {
     console.error('Sanity fetch error:', error);
-    // Return empty data instead of throwing in development
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('Returning empty data due to Sanity error in development mode');
-      return (Array.isArray([]) ? [] : null) as T;
-    }
-    throw new Error('Failed to fetch data from Sanity');
+    // Always throw error so API routes can handle fallback
+    throw error;
   }
 }
 

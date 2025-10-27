@@ -44,40 +44,18 @@ export const PROPERTY_WITH_AGENT = `
   }
 `;
 
-// Get all properties with filters
+// Get all properties with filters - SIMPLIFIED VERSION
 export const GET_PROPERTIES = `
-  *[_type == "property" && status in ["sale", "rent"]
-    ${`$q != null && $q != "" => title match $q || city match $q || address match $q`}
-    ${`$city != null && $city != "" => && city == $city`}
-    ${`$province != null && $province != "" => && province == $province`}
-    ${`$type != null && $type != "" => && type == $type`}
-    ${`$status != null && $status != "" => && status == $status`}
-    ${`$minPrice != null => && price >= $minPrice`}
-    ${`$maxPrice != null => && price <= $maxPrice`}
-    ${`$bedrooms != null => && bedrooms >= $bedrooms`}
-    ${`$minLand != null => && landSize >= $minLand`}
-  ] | order(
-    ${`$sort == "price_asc" => price asc`}
-    ${`$sort == "price_desc" => price desc`}
-    ${`$sort == "oldest" => listedAt asc`}
-    listedAt desc
-  ) [$cursor...$limit] {
+  *[_type == "property" && status in ["sale", "rent"]] | order(listedAt desc) [$cursor...$limit] {
     ${PROPERTY_FIELDS}
   }
 `;
 
-// Get properties by bounds (for map)
+// Get properties by bounds (for map) - SIMPLIFIED VERSION
 export const GET_PROPERTIES_BY_BOUNDS = `
   *[_type == "property" && status in ["sale", "rent"]
     && location.lat > $swLat && location.lat < $neLat
     && location.lng > $swLng && location.lng < $neLng
-    ${`$q != null && $q != "" => && (title match $q || city match $q)`}
-    ${`$city != null && $city != "" => && city == $city`}
-    ${`$type != null && $type != "" => && type == $type`}
-    ${`$status != null && $status != "" => && status == $status`}
-    ${`$minPrice != null => && price >= $minPrice`}
-    ${`$maxPrice != null => && price <= $maxPrice`}
-    ${`$bedrooms != null => && bedrooms >= $bedrooms`}
   ] [0...100] {
     ${PROPERTY_FIELDS}
   }
@@ -111,19 +89,9 @@ export const GET_RELATED_PROPERTIES = `
   }
 `;
 
-// Get properties count
+// Get properties count - SIMPLIFIED VERSION
 export const GET_PROPERTIES_COUNT = `
-  count(*[_type == "property" && status in ["sale", "rent"]
-    ${`$q != null && $q != "" => && (title match $q || city match $q)`}
-    ${`$city != null && $city != "" => && city == $city`}
-    ${`$province != null && $province != "" => && province == $province`}
-    ${`$type != null && $type != "" => && type == $type`}
-    ${`$status != null && $status != "" => && status == $status`}
-    ${`$minPrice != null => && price >= $minPrice`}
-    ${`$maxPrice != null => && price <= $maxPrice`}
-    ${`$bedrooms != null => && bedrooms >= $bedrooms`}
-    ${`$minLand != null => && landSize >= $minLand`}
-  ])
+  count(*[_type == "property" && status in ["sale", "rent"]])
 `;
 
 // Get cities for filter
@@ -188,8 +156,8 @@ export const ARTICLE_FIELDS = `
 
 export const GET_ARTICLES = `
   *[_type == "article"
-    ${`$category != null && $category != "" => && category == $category`}
-    ${`$featured != null => && featured == $featured`}
+    ${`$category != null && $category != "" => category == $category`}
+    ${`$featured != null => featured == $featured`}
   ] | order(publishedAt desc) [$cursor...$limit] {
     ${ARTICLE_FIELDS}
   }
@@ -239,8 +207,8 @@ export const CREATE_LEAD = `
 
 export const GET_LEADS = `
   *[_type == "lead"
-    ${`$status != null && $status != "" => && status == $status`}
-    ${`$priority != null && $priority != "" => && priority == $priority`}
+    ${`$status != null && $status != "" => status == $status`}
+    ${`$priority != null && $priority != "" => priority == $priority`}
   ] | order(createdAt desc) [$cursor...$limit] {
     _id,
     name,
@@ -293,8 +261,8 @@ export const GET_LEAD_BY_ID = `
 
 export const GET_LEADS_COUNT = `
   count(*[_type == "lead"
-    ${`$status != null && $status != "" => && status == $status`}
-    ${`$priority != null && $priority != "" => && priority == $priority`}
+    ${`$status != null && $status != "" => status == $status`}
+    ${`$priority != null && $priority != "" => priority == $priority`}
   ])
 `;
 

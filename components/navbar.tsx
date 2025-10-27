@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -73,26 +74,21 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center space-x-2 group"
+            className="flex items-center group"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-brand-gold rounded-lg blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-              <div className="relative w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-brand-gold to-brand-gold/80 rounded-lg flex items-center justify-center">
-                <span className="text-white font-urbanist font-black text-xl md:text-2xl">
-                  H
-                </span>
+              <div className="absolute inset-0 rounded-lg blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-300 bg-brand-gold" />
+              <div className="relative w-32 h-10 md:w-40 md:h-12">
+                <Image
+                  src="/Homelink_Logo.png"
+                  alt="Homelink Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                  sizes="(max-width: 768px) 128px, 160px"
+                />
               </div>
             </div>
-            <span
-              className={cn(
-                "font-urbanist font-bold text-xl md:text-2xl transition-colors",
-                isScrolled || !isHomePage
-                  ? "text-foreground"
-                  : "text-white"
-              )}
-            >
-              Homelink
-            </span>
           </Link>
 
           {/* Desktop Navigation */}

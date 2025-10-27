@@ -33,8 +33,9 @@ export default withAuth(
 );
 
 // Configure which routes to protect - only protect admin routes
+// Exclude /admin/login to prevent infinite redirect loop
 export const config = {
   matcher: [
-    "/admin/:path*",
+    "/admin/((?!login).*)",
   ],
 };

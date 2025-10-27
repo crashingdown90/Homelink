@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { 
-  Facebook, 
-  Twitter, 
-  Instagram, 
-  Linkedin, 
-  Mail, 
-  Phone, 
-  MapPin 
+import Image from "next/image";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
+  MapPin
 } from "lucide-react";
 
 const footerLinks = {
@@ -62,18 +63,19 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <Link href="/" className="inline-flex items-center space-x-2 group">
+            <Link href="/" className="inline-flex items-center group">
               <div className="relative">
-                <div className="absolute inset-0 bg-brand-gold rounded-lg blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300" />
-                <div className="relative w-12 h-12 bg-gradient-to-br from-brand-gold to-brand-gold/80 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-urbanist font-black text-2xl">
-                    H
-                  </span>
+                <div className="absolute inset-0 rounded-lg blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300 bg-brand-gold" />
+                <div className="relative w-40 h-12">
+                  <Image
+                    src="/Homelink_Logo.png"
+                    alt="Homelink Logo"
+                    fill
+                    className="object-contain brightness-0 invert"
+                    sizes="160px"
+                  />
                 </div>
               </div>
-              <span className="font-urbanist font-bold text-2xl text-white">
-                Homelink
-              </span>
             </Link>
             
             <p className="mt-4 text-white/70 text-sm leading-relaxed max-w-sm">

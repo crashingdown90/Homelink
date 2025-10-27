@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -85,11 +86,19 @@ export function AdminSidebar() {
         <nav className="h-full flex flex-col">
           {/* Logo/Brand */}
           <div className="p-6 border-b">
-            <Link href="/admin" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-brand-gold rounded-lg flex items-center justify-center">
+            <Link href="/admin" className="flex items-center gap-3">
+              <div className="relative w-28 h-8">
+                <Image
+                  src="/Homelink_Logo.png"
+                  alt="Homelink Admin"
+                  fill
+                  className="object-contain"
+                  sizes="112px"
+                />
+              </div>
+              <div className="w-8 h-8 bg-brand-gold rounded-lg flex items-center justify-center flex-shrink-0">
                 <Shield className="h-5 w-5 text-white" />
               </div>
-              <span className="font-urbanist font-bold text-xl">Admin Panel</span>
             </Link>
           </div>
 

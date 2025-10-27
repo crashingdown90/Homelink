@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sanityFetch } from '@/lib/sanity/client';
 import { GET_PROPERTIES, GET_PROPERTIES_COUNT } from '@/lib/sanity/queries';
+import { getDummyProperties } from '@/lib/dummy-properties';
 import { z } from 'zod';
 
 // Request validation schema
@@ -52,17 +53,32 @@ export async function GET(request: NextRequest) {
       limit: params.cursor + params.limit,
     };
 
-    // Fetch properties from Sanity
-    const [items, total] = await Promise.all([
-      sanityFetch(GET_PROPERTIES, groqParams, {
-        cache: 'no-store',
-        next: { revalidate: 60 }, // Revalidate every minute
-      }),
-      sanityFetch<number>(GET_PROPERTIES_COUNT, groqParams, {
-        cache: 'no-store',
-        next: { revalidate: 60 },
-      }),
-    ]);
+    // Always use dummy data for now since Sanity is not configured properly
+    console.log('Using dummy data for listings');
+    
+    const dummyData = getDummyProperties({
+      type: params.type,
+      status: params.status,
+      city: params.city,
+      minPrice: params.minPrice,
+      maxPrice: params.maxPrice,
+      bedrooms: params.bedrooms,
+    });
+
+    // Apply sorting
+    if (params.sort === 'price_asc') {
+      dummyData.sort((a, b) => a.price - b.price);
+    } else if (params.sort === 'price_desc') {
+      dummyData.sort((a, b) => b.price - a.price);
+    } else if (params.sort === 'oldest') {
+      dummyData.sort((a, b) => new Date(a.listedAt!).getTime() - new Date(b.listedAt!).getTime());
+    } else {
+      dummyData.sort((a, b) => new Date(b.listedAt!).getTime() - new Date(a.listedAt!).getTime());
+    }
+
+    // Apply pagination
+    const total = dummyData.length;
+    const items = dummyData.slice(params.cursor, params.cursor + params.limit);
 
     // Calculate if there are more items
     const hasMore = params.cursor + params.limit < total;

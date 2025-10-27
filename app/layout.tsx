@@ -134,17 +134,17 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://api.mapbox.com" />
-        
+
         {/* DNS Prefetch for additional performance */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        
+      </head>
+      <body className={`${inter.className} antialiased min-h-screen`}>
         {/* Skip to main content for accessibility */}
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-navy text-white px-4 py-2 rounded-lg z-50">
           Skip to main content
         </a>
-      </head>
-      <body className={`${inter.className} antialiased min-h-screen`}>
+
         <Providers>
           <div className="relative flex min-h-screen flex-col">
             {children}

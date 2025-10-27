@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sanityFetch } from '@/lib/sanity/client';
 import { GET_PROPERTIES_BY_BOUNDS } from '@/lib/sanity/queries';
+import { getDummyProperties } from '@/lib/dummy-properties';
 import { z } from 'zod';
 
 // Request validation schema for bounds search
@@ -62,10 +63,37 @@ export async function GET(request: NextRequest) {
     };
 
     // Fetch properties within bounds from Sanity
-    const items = await sanityFetch(GET_PROPERTIES_BY_BOUNDS, groqParams, {
-      cache: 'no-store',
-      next: { revalidate: 30 }, // Revalidate every 30 seconds for map data
-    });
+    let items;
+
+    try {
+      items = await sanityFetch(GET_PROPERTIES_BY_BOUNDS, groqParams, {
+        cache: 'no-store',
+        next: { revalidate: 30 }, // Revalidate every 30 seconds for map data
+      });
+    } catch (sanityError) {
+      console.warn('Sanity fetch failed, using dummy data:', sanityError);
+
+      // Use dummy data as fallback
+      const dummyData = getDummyProperties({
+        type: params.type,
+        status: params.status,
+        city: params.city,
+        minPrice: params.minPrice,
+        maxPrice: params.maxPrice,
+        bedrooms: params.bedrooms,
+      });
+
+      // Filter by bounds
+      items = dummyData.filter(property => {
+        if (!property.location) return false;
+        return (
+          property.location.lat > params.swLat &&
+          property.location.lat < params.neLat &&
+          property.location.lng > params.swLng &&
+          property.location.lng < params.neLng
+        );
+      });
+    }
 
     // Return response with bounds for map reference
     return NextResponse.json(

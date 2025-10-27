@@ -5,6 +5,7 @@ const nextConfig = {
       'cdn.sanity.io', // Sanity CDN for images
       'api.mapbox.com', // Mapbox static images
       'res.cloudinary.com', // Potential future CDN
+      'images.unsplash.com', // Unsplash images for dummy data
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -41,7 +42,7 @@ const nextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://api.mapbox.com https://cdn.sanity.io https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://connect.facebook.net",
               "style-src 'self' 'unsafe-inline' https://api.mapbox.com https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https://cdn.sanity.io https://api.mapbox.com https://www.google-analytics.com https://www.facebook.com",
+              "img-src 'self' data: blob: https://cdn.sanity.io https://api.mapbox.com https://images.unsplash.com https://www.google-analytics.com https://www.facebook.com",
               "font-src 'self' data: https://fonts.gstatic.com",
               "connect-src 'self' https://api.mapbox.com https://cdn.sanity.io https://www.google-analytics.com https://challenges.cloudflare.com https://graph.facebook.com",
               "frame-src 'self' https://challenges.cloudflare.com",
